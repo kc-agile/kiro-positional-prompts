@@ -34,18 +34,18 @@ Define prompt templates once with positional or named placeholders, then fill th
 
 ---
 
-## 📦 Ready-to-Use Templates Out of the Box
-
-When you install this Power, the following templates are instantly available in Kiro:
-
-| Slash Command | Parameters | Description |
+## 💡 Example Templates You Can Create
+ 
+The Power starts with a clean, empty template store—giving you full control over what prompts exist. Here are popular template examples you can define:
+ 
+| Template Name | Parameters | Example Purpose |
 |---|---|---|
-| `/code-review` | `language`, `code`, `focus` | In-depth code review for quality, security, and edge cases |
-| `/test-generator` | `language`, `code`, `test_scope` | Generates comprehensive unit test suites |
-| `/refactor` | `language`, `code`, `constraints`, `goal` | Refactors code while enforcing non-breaking constraints |
-| `/bug-analysis` | `language`, `error_message`, `code`, `expected_behavior` | Diagnoses stack traces and provides the patch |
-| `/explain` | `language`, `audience`, `code` | Explains logic tailored to junior, mid, or senior developers |
-| `/api-design` | `api_type`, `use_case`, `requirements`, `constraints` | Designs REST, GraphQL, or gRPC endpoint contracts |
+| `code-review` | `language`, `code`, `focus` | In-depth code review for quality, security, and edge cases |
+| `test-generator` | `language`, `code`, `test_scope` | Generates comprehensive unit test suites |
+| `refactor` | `language`, `code`, `constraints`, `goal` | Refactors code while enforcing non-breaking constraints |
+| `bug-analysis` | `language`, `error_message`, `code`, `expected_behavior` | Diagnoses stack traces and provides the patch |
+| `explain` | `language`, `audience`, `code` | Explains logic tailored to junior, mid, or senior developers |
+| `api-design` | `api_type`, `use_case`, `requirements`, `constraints` | Designs REST, GraphQL, or gRPC endpoint contracts |
 
 ---
 

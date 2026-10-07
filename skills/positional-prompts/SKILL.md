@@ -13,36 +13,39 @@ keywords:
 
 Manage and invoke reusable prompt templates with positional parameters (`{0}`, `{1}`, `${1}`, `$1`) and interactive slash commands in Kiro.
 
-## How It Works in Kiro
+## ⛔ STRICT AGENT BEHAVIOR RULES (DO NOT VIOLATE)
 
-When this Power is active, Kiro automatically registers stored prompt templates as **MCP Prompts**:
-1. **Interactive Slash Commands**: Type `/` in Kiro chat to see prompts like `/code-review`, `/test-generator`, `/refactor`, etc.
-2. **Positional & Named Substitution**: Supports `{0}`, `{1}`, `${1}`, `${2}`, `$1`, `$2`, and named placeholders `{language}`, `{code}`.
-3. **Agent MCP Tools**: The agent can create, list, render, and delete prompt templates on the fly.
-4. **Persistent Storage**: Saved in `~/.kiro/positional-prompts/templates.json` across workspaces and sessions.
+1. **NEVER PROACTIVELY CREATE TEMPLATES**:
+   - Do **NOT** say "Let me create a simple template for you", "Let's create your first template", or similar.
+   - Do **NOT** call the `create_template` tool during onboarding, introductions, or unprompted chats.
+   - The template store starts completely empty. The user has full control and decides what templates to create.
+
+2. **PROVIDE TEXT SUGGESTIONS ONLY**:
+   - When the user asks for ideas or examples, display template patterns as **plain markdown text**.
+   - NEVER create the template on the user's behalf unless they explicitly tell you: *"Yes, create that template"*, *"Save this template"*, or equivalent.
+
+3. **HOW THE POWER WORKS**:
+   - **Slash Commands**: Stored templates appear as native `/` slash commands in Kiro chat (`prompts/list`, `prompts/get`).
+   - **Parameter Substitution**: Supports `{0}`, `{1}`, `${1}`, `$1`, and named `{param}` placeholders.
+   - **Tools**: Programmatic tools (`create_template`, `render_prompt`, `list_templates`, `get_template`, `delete_template`).
+   - **Storage**: Persisted locally in `~/.kiro/positional-prompts/templates.json`.
 
 ---
 
 ## 1. Using Slash Commands in Chat
 
-Type `/` in Kiro chat to choose a template, or invoke it directly:
+Once you have created prompt templates, type `/` in Kiro chat to invoke them:
 
-```
-/code-review language="TypeScript" code="const add = (a, b) => a + b;" focus="type safety"
-```
-
-Or pass positional parameters:
-```
-/code-review TypeScript "const add = (a, b) => a + b;" "type safety"
+```text
+/my-template "arg1" "arg2"
 ```
 
-### Built-in Templates
-- `/code-review` – Structured code review with language, snippet, and focus area.
-- `/test-generator` – Generate comprehensive unit tests covering edge cases.
-- `/refactor` – Refactor code with specific constraints and goals.
-- `/bug-analysis` – Analyze stack traces and propose bug fixes.
-- `/explain` – Explain code architecture for a specific developer audience.
-- `/api-design` – Design REST/GraphQL API contracts and endpoints.
+Or pass named parameters:
+```text
+/my-template param1="value1" param2="value2"
+```
+
+*(Note: There are no default or built-in templates. The template store starts completely empty so you can create only what you need.)*
 
 ---
 
