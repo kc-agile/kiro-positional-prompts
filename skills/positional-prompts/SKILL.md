@@ -1,152 +1,112 @@
 ---
 name: positional-prompts
-description: Template and reuse prompts with positional parameters
+description: Create, manage, and invoke prompt templates with positional parameters ({0}, {1}, $1, $2) and slash commands
 keywords:
   - prompts
   - templates
   - parametric
-  - reuse
+  - slash-commands
+  - mcp
 ---
 
-# Positional Prompts
+# Positional Prompts Power
 
-Template and reuse prompts with positional parameters. Create templates with `{0}`, `{1}`, etc., then fill them with arguments.
+Manage and invoke reusable prompt templates with positional parameters (`{0}`, `{1}`, `${1}`, `$1`) and interactive slash commands in Kiro.
 
-## Quick Start
+## How It Works in Kiro
 
-### 1. Create a Template
+When this Power is active, Kiro automatically registers stored prompt templates as **MCP Prompts**:
+1. **Interactive Slash Commands**: Type `/` in Kiro chat to see prompts like `/code-review`, `/test-generator`, `/refactor`, etc.
+2. **Positional & Named Substitution**: Supports `{0}`, `{1}`, `${1}`, `${2}`, `$1`, `$2`, and named placeholders `{language}`, `{code}`.
+3. **Agent MCP Tools**: The agent can create, list, render, and delete prompt templates on the fly.
+4. **Persistent Storage**: Saved in `~/.kiro/positional-prompts/templates.json` across workspaces and sessions.
 
-Use the MCP tool `create_template`:
+---
 
-```json
-{
-  "name": "code-review",
-  "template": "Review this {0} code:\n\n```{0}\n{1}\n```\n\nFocus on: {2}",
-  "description": "Code review template"
-}
+## 1. Using Slash Commands in Chat
+
+Type `/` in Kiro chat to choose a template, or invoke it directly:
+
+```
+/code-review language="TypeScript" code="const add = (a, b) => a + b;" focus="type safety"
 ```
 
-### 2. Render with Arguments
-
-Use the MCP tool `render_prompt`:
-
-```json
-{
-  "name": "code-review",
-  "args": ["TypeScript", "const add = (a, b) => a + b;", "type safety"]
-}
+Or pass positional parameters:
+```
+/code-review TypeScript "const add = (a, b) => a + b;" "type safety"
 ```
 
-**Result:**
-```
-Review this TypeScript code:
+### Built-in Templates
+- `/code-review` – Structured code review with language, snippet, and focus area.
+- `/test-generator` – Generate comprehensive unit tests covering edge cases.
+- `/refactor` – Refactor code with specific constraints and goals.
+- `/bug-analysis` – Analyze stack traces and propose bug fixes.
+- `/explain` – Explain code architecture for a specific developer audience.
+- `/api-design` – Design REST/GraphQL API contracts and endpoints.
 
-```typescript
-const add = (a, b) => a + b;
-```
+---
 
-Focus on: type safety
-```
+## 2. Using MCP Tools (Agent Workflows)
 
-## Available Tools
+When writing automation scripts or interacting via the AI agent, use the registered MCP tools:
 
 ### `create_template`
-Store a reusable prompt template with positional placeholders.
-
-**Parameters:**
-- `name` (string, required): Template identifier (e.g., "code-review")
-- `template` (string, required): Template text with `{0}`, `{1}`, etc. placeholders
-- `description` (string, optional): What the template does
+Create a new reusable prompt template.
+```json
+{
+  "name": "sql-optimizer",
+  "template": "Optimize this {0} SQL query:\n\n```sql\n{1}\n```\n\nTarget latency: {2}",
+  "description": "SQL query optimization template",
+  "paramNames": ["dialect", "query", "target_latency"]
+}
+```
 
 ### `render_prompt`
-Fill a template with arguments.
-
-**Parameters:**
-- `name` (string, required): Template identifier
-- `args` (array of strings, required): Values for `{0}`, `{1}`, etc., in order
+Render a prompt with arguments (array or object):
+```json
+{
+  "name": "sql-optimizer",
+  "args": ["PostgreSQL", "SELECT * FROM users WHERE status = 'active';", "< 50ms"]
+}
+```
 
 ### `list_templates`
-List all stored templates.
+List all currently stored templates.
 
 ### `get_template`
-Get details of a single template.
+Retrieve the template text, description, and parameter names.
 
-**Parameters:**
-- `name` (string, required): Template identifier
+### `delete_template`
+Remove an existing template.
 
-## Example Templates
+---
 
-### code-review
-Review code with language, snippet, and focus area.
+## 3. Placeholder Formats Supported
 
-**Usage:**
-```json
-{
-  "name": "code-review",
-  "args": ["Python", "def fib(n):\n  if n <= 1: return n\n  return fib(n-1) + fib(n-2)", "time complexity"]
-}
-```
+| Format | Example | Description |
+|---|---|---|
+| `{0}`, `{1}`, `{2}` | `Review {0} code: {1}` | 0-indexed positional placeholders |
+| `${1}`, `${2}` | `Review ${1} code: ${2}` | 1-indexed Copilot / bash style |
+| `$1`, `$2` | `Review $1 code: $2` | 1-indexed shorthand |
+| `{name}` | `Review {language} code: {code}` | Named parameter replacement |
 
-### test-generator
-Generate unit tests for a function.
+---
 
-**Usage:**
-```json
-{
-  "name": "test-generator",
-  "args": ["JavaScript", "const validate = (email) => /^.+@.+\\..+$/.test(email);", "valid emails, invalid emails"]
-}
-```
+## 4. Alternative: Native File Prompts (`.kiro/prompts/`)
 
-### documentation
-Write documentation for a component.
+For workspace-scoped static prompt files that don't need persistent MCP storage, Kiro also natively supports markdown files placed in `.kiro/prompts/`:
 
-**Usage:**
-```json
-{
-  "name": "documentation",
-  "args": ["API Reference", "User authentication", "REST endpoint documentation", "backend developers"]
-}
-```
-
-## How It Works
-
-1. **Define** a template with positional placeholders (`{0}`, `{1}`, etc.)
-2. **Store** it with `create_template`
-3. **Render** with `render_prompt` by passing arguments
-4. **Reuse** the same template with different arguments
-
-Templates are persisted to `~/.kiro/positional-prompts/templates.json` and survive across sessions.
-
-## Typical Workflow
-
-1. Create a template for a common task (e.g., code review)
-2. Render it with your specific context (language, code, focus)
-3. Copy the rendered prompt and use it in chat or workflows
-4. Reuse the template next time without rewriting
-
-## Team Collaboration
-
-Share templates in `.kiro/steering/` files so teammates discover and reuse them:
-
+**`.kiro/prompts/code-review.md`**:
 ```markdown
-# Team Prompts
+Review this ${1} code:
 
-## code-review
-Template: `code-review`
-Parameters: language, code snippet, focus areas
-
-## test-generator  
-Template: `test-generator`
-Parameters: language, function, test scope
+```${1}
+${2}
 ```
 
-## Storage
-
-Templates are saved as JSON in `~/.kiro/positional-prompts/templates.json`. They persist across sessions and workspaces.
-
-## See Also
-
-- [Team Workflow Guide](guides/team-workflow.md) – Step-by-step usage guide
-- [Advanced Strategies](guides/advanced.md) – Composition, scaling, integrations
-- [Examples](examples/templates.json) – Ready-to-use templates
+Focus on: ${3}
+```
+Invoked in chat via:
+```
+/code-review typescript "const x = 1;" "clean code"
+```

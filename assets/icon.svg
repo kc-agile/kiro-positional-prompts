@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <linearGradient id="kcGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6366F1" />
+      <stop offset="50%" stop-color="#4F46E5" />
+      <stop offset="100%" stop-color="#06B6D4" />
+    </linearGradient>
+    <linearGradient id="glowGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#38BDF8" stop-opacity="0.8" />
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0.2" />
+    </linearGradient>
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#4F46E5" flood-opacity="0.4" />
+    </filter>
+  </defs>
+
+  <!-- Background Squircle with Glow -->
+  <rect x="8" y="8" width="112" height="112" rx="28" fill="url(#kcGrad)" filter="url(#dropShadow)" />
+  <rect x="9" y="9" width="110" height="110" rx="27" fill="none" stroke="url(#glowGrad)" stroke-width="2" />
+
+  <!-- Monogram KC -->
+  <text x="64" y="78" 
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif" 
+        font-size="46" 
+        font-weight="800" 
+        letter-spacing="-1.5"
+        fill="#FFFFFF" 
+        text-anchor="middle">KC</text>
+
+  <!-- Accent Energy Dot -->
+  <circle cx="95" cy="42" r="5" fill="#38BDF8" />
+</svg>

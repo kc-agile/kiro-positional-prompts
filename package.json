@@ -1,15 +1,26 @@
 {
-  "name": "@kiro-powers/positional-prompts",
+  "name": "kiro-positional-prompts",
   "version": "1.0.0",
-  "description": "Template and reuse prompts with positional parameters",
+  "description": "Kiro Power and MCP Server for prompt templates with positional parameters ({0}, {1}, $1, $2) and interactive slash commands",
   "main": "server.js",
   "bin": {
-    "positional-prompts": "server.js"
+    "kiro-positional-prompts": "server.js"
   },
   "scripts": {
-    "test": "node test.js"
+    "test": "node test.js",
+    "start": "node server.js"
   },
-  "keywords": ["kiro", "power", "prompts", "templates", "mcp"],
+  "keywords": [
+    "kiro",
+    "power",
+    "kiro-power",
+    "prompts",
+    "templates",
+    "positional-prompts",
+    "mcp",
+    "mcp-server",
+    "slash-commands"
+  ],
   "author": "Krishna chaitanya Rupavatharam",
   "license": "MIT",
   "engines": {
@@ -24,4 +35,3 @@
   },
   "homepage": "https://github.com/kc-agile/kiro-positional-prompts#readme"
 }
-

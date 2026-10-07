@@ -1,20 +1,21 @@
 {
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
-  "name": "positional-prompts",
+  "name": "kiro-positional-prompts",
   "version": "1.0.0",
-  "displayName": "Positional Prompts",
-  "description": "Template and reuse prompts with positional parameters. Create prompt templates with {0}, {1}, etc., then fill them with arguments.",
-  "author": "Krishna chaitanya Rupavatharam",
+  "description": "Template and reuse prompts with positional parameters ({0}, {1}, $1, $2) and interactive slash commands in Kiro.",
+  "author": {
+    "name": "Krishna chaitanya Rupavatharam"
+  },
+  "homepage": "https://github.com/kc-agile/kiro-positional-prompts#readme",
+  "repository": "https://github.com/kc-agile/kiro-positional-prompts.git",
   "license": "MIT",
   "keywords": [
+    "kiro",
+    "power",
     "prompts",
     "templates",
-    "parametric",
-    "reuse"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/kc-agile/kiro-positional-prompts.git"
-  }
+    "positional-parameters",
+    "slash-commands",
+    "mcp"
+  ]
 }
-

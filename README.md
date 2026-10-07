@@ -1,179 +1,223 @@
-# Positional Prompts Power
+<p align="center">
+  <img src="assets/icon.svg" width="84" height="84" alt="KC - Positional Prompts Power" /><br/>
+  <b>Positional Prompts Power for Kiro ⚡</b><br/>
+  <sub>Created by <b>Krishna Chaitanya Rupavatharam</b> (<b>KC</b>)</sub>
+</p>
 
-A lightweight Kiro Power for templating and reusing prompts with positional parameters.
+<p align="center">
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" /></a>
+  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-%3E%3D18.0.0-green.svg" alt="Node.js" /></a>
+  <a href="https://modelcontextprotocol.io/"><img src="https://img.shields.io/badge/MCP-Protocol-purple.svg" alt="MCP Protocol" /></a>
+  <a href="https://agent-plugins.org/"><img src="https://img.shields.io/badge/Agent%20Plugins-1.0.0-orange.svg" alt="Agent Plugins" /></a>
+  <a href="test.js"><img src="https://img.shields.io/badge/tests-passing-brightgreen.svg" alt="Tests" /></a>
+</p>
 
-## Overview
+> Bring GitHub Copilot-style positional parameter prompts (`{0}`, `{1}`, `$1`, `$2`) and interactive slash commands to **Kiro** and any **MCP-compatible** agent.
 
-Define prompt templates once with `{0}`, `{1}`, etc. placeholders, then fill them with different arguments each time. Perfect for teams that want consistent, reusable prompts without reinventing the wheel.
+Define prompt templates once with positional or named placeholders, then fill them with arguments on the fly directly in chat or via AI agent tools.
 
-```
-Template:  "Review this {0} code:\n\n{1}\n\nFocus on: {2}"
+---
 
-Render with ["TypeScript", "const greet = ...", "type safety"]
+## ✨ Features
 
-Result:    "Review this TypeScript code:\n\n...\n\nFocus on: type safety"
-```
+- 🚀 **Interactive Slash Commands**: Pre-loaded with ready-to-use slash commands (`/code-review`, `/test-generator`, `/refactor`, etc.) that appear directly in Kiro's `/` completion menu.
+- 🎯 **Flexible Placeholders**:
+  - `{0}`, `{1}`, `{2}` *(0-indexed)*
+  - `${1}`, `${2}` or `$1`, `$2` *(1-indexed Copilot & shell style)*
+  - `{language}`, `{code}`, `{focus}` *(named variables)*
+- 🛠️ **Dual Protocol Support**:
+  - **MCP Prompts Protocol** (`prompts/list`, `prompts/get`) for instant IDE slash commands.
+  - **MCP Tools Protocol** (`create_template`, `render_prompt`, `list_templates`, `get_template`, `delete_template`) for agentic workflows.
+- 💾 **Persistent Cross-Session Storage**: Stored locally in `~/.kiro/positional-prompts/templates.json`.
+- 🪶 **Zero External Dependencies**: Pure Node.js standard library (no bloated `node_modules`).
+- 🌐 **Cross-Platform**: Windows, macOS, and Linux.
 
-## Features
+---
 
-- **Zero dependencies** – just Node.js
-- **Persistent storage** – templates saved to `~/.kiro/positional-prompts/`
-- **MCP-native** – 4 simple tools (create, render, list, get)
-- **Cross-platform** – Windows, Mac, Linux
-- **Team-friendly** – share templates in steering files
-- **Composable** – combine prompts in workflows
+## 📦 Ready-to-Use Templates Out of the Box
 
-## Install
+When you install this Power, the following templates are instantly available in Kiro:
 
-### From GitHub
+| Slash Command | Parameters | Description |
+|---|---|---|
+| `/code-review` | `language`, `code`, `focus` | In-depth code review for quality, security, and edge cases |
+| `/test-generator` | `language`, `code`, `test_scope` | Generates comprehensive unit test suites |
+| `/refactor` | `language`, `code`, `constraints`, `goal` | Refactors code while enforcing non-breaking constraints |
+| `/bug-analysis` | `language`, `error_message`, `code`, `expected_behavior` | Diagnoses stack traces and provides the patch |
+| `/explain` | `language`, `audience`, `code` | Explains logic tailored to junior, mid, or senior developers |
+| `/api-design` | `api_type`, `use_case`, `requirements`, `constraints` | Designs REST, GraphQL, or gRPC endpoint contracts |
 
+---
+
+## 🚀 Quick Install
+
+### Method 1: Install from Kiro UI (Recommended)
+
+1. Open **Kiro** → Click on the **Powers** panel.
+2. Click **Add plugin from GitHub**.
+3. Enter:
+   ```text
+   kc-agile/kiro-positional-prompts
+   ```
+4. Click **Install** and restart Kiro.
+
+---
+
+### Method 2: Git Clone into Kiro Plugins
+
+Clone directly into your local Kiro plugins directory:
+
+**macOS / Linux:**
 ```bash
-# Clone into local plugins directory
 git clone https://github.com/kc-agile/kiro-positional-prompts.git ~/.kiro/plugins/positional-prompts
 ```
 
-Then restart Kiro. The power will auto-discover via `plugin.json`.
+**Windows (PowerShell):**
+```powershell
+git clone https://github.com/kc-agile/kiro-positional-prompts.git "$HOME\.kiro\plugins\positional-prompts"
+```
 
-### From the Kiro UI
+Restart Kiro to auto-discover via `plugin.json`.
 
-1. Open Kiro → Powers panel
-2. Click "Add plugin from GitHub"
-3. Enter: `kc-agile/kiro-positional-prompts`
-4. Click install
+---
 
-Then restart Kiro.
+### Method 3: Standard MCP Configuration
 
-### For Local Development
+To add this server directly to your Kiro workspace settings (`.kiro/settings/mcp.json`), or other MCP clients (Claude Desktop, Cursor):
+
+```json
+{
+  "mcpServers": {
+    "positional-prompts": {
+      "command": "node",
+      "args": ["c:/path/to/kiro-positional-prompts/server.js"]
+    }
+  }
+}
+```
+
+---
+
+## 💡 How to Use
+
+### 1. In Kiro Chat (Interactive Slash Command)
+
+Type `/` in chat to see your prompts with argument auto-complete:
+
+```text
+/code-review language="TypeScript" code="const add = (a: number, b: number) => a + b;" focus="type safety"
+```
+
+Or pass positional values:
+```text
+/code-review TypeScript "const add = (a: number, b: number) => a + b;" "type safety"
+```
+
+### 2. Creating New Templates On the Fly
+
+Ask Kiro:
+> *"Create a prompt template called `sql-optimizer` that takes dialect, query, and target latency."*
+
+The agent will call the `create_template` tool:
+```json
+{
+  "name": "sql-optimizer",
+  "template": "Optimize this {0} SQL query:\n\n```sql\n{1}\n```\n\nTarget latency: {2}",
+  "description": "SQL optimization template",
+  "paramNames": ["dialect", "query", "target_latency"]
+}
+```
+
+Once created, it is immediately available as `/sql-optimizer` in chat!
+
+---
+
+## 🛠️ MCP Tools Reference
+
+| Tool | Purpose | Parameters |
+|---|---|---|
+| `create_template` | Store a new reusable template | `name` (string), `template` (string), `description` (optional), `paramNames` (optional array) |
+| `render_prompt` | Fill a template with arguments | `name` (string), `args` (array or object) |
+| `list_templates` | List all stored templates | *(none)* |
+| `get_template` | Retrieve template details | `name` (string) |
+| `delete_template` | Remove an existing template | `name` (string) |
+
+---
+
+## 🧪 Verification & Testing
+
+Verify that your MCP server passes all handshake and protocol checks:
 
 ```bash
 git clone https://github.com/kc-agile/kiro-positional-prompts.git
 cd kiro-positional-prompts
-npm test  # Verify MCP server works
+npm test
 ```
 
-Then add to Kiro plugins from the local path.
+Expected output:
+```text
+🧪 Starting Positional Prompts Power test suite...
 
-## Quick Start
+1️⃣  Testing MCP initialize handshake...
+   ✓ Handshake successful: serverInfo = { name: 'positional-prompts', version: '1.0.0' }
 
-**Step 1: Create a template**
+2️⃣  Testing MCP prompts/list...
+   ✓ Found 6 prompts: code-review, test-generator, refactor, bug-analysis, explain, api-design
 
-Use the MCP tool `create_template`:
-```json
-{
-  "name": "code-review",
-  "template": "Review this {0} code:\n\n{1}\n\nFocus on: {2}",
-  "description": "Code review template"
-}
+3️⃣  Testing MCP prompts/get (code-review)...
+   ✓ Rendered prompt content:
+   ----------------------------------------
+   Review this TypeScript code:
+   ...
+   ----------------------------------------
+
+4️⃣  Testing MCP tools/list...
+   ✓ Found 5 tools: create_template, render_prompt, list_templates, get_template, delete_template
+
+🎉 ALL TESTS PASSED SUCCESSFULLY!
 ```
-
-**Step 2: Render with arguments**
-
-Use the MCP tool `render_prompt`:
-```json
-{
-  "name": "code-review",
-  "args": ["TypeScript", "const add = (a, b) => a + b;", "type safety"]
-}
-```
-
-**Step 3: Use the result**
-
-Copy the rendered prompt and paste into Kiro chat.
-
-**See [QUICK_START.md](QUICK_START.md) for a 30-second overview.**
-
-## Tools
-
-### `create_template`
-Store a reusable prompt template.
-
-**Parameters:**
-- `name` (string): Template ID
-- `template` (string): Template with `{0}`, `{1}`, ... placeholders
-- `description` (string, optional): What the template does
-
-### `render_prompt`
-Fill a template with arguments.
-
-**Parameters:**
-- `name` (string): Template ID
-- `args` (string[]): Values for `{0}`, `{1}`, etc.
-
-### `list_templates`
-List all stored templates.
-
-### `get_template`
-Get a single template's details.
-
-## Examples
-
-See **[examples/templates.json](examples/templates.json)** for ready-to-use templates:
-
-- **code-review**: Review code with language, snippet, and focus
-- **test-generator**: Generate tests for a function
-- **documentation**: Write docs for components
-- **refactor**: Refactor with constraints
-- **bug-analysis**: Debug issues
-- **api-design**: Design APIs
-
-## Guides
-
-- **[QUICK_START.md](QUICK_START.md)** – 30-second setup
-- **[guides/team-workflow.md](guides/team-workflow.md)** – Step-by-step with examples
-- **[guides/advanced.md](guides/advanced.md)** – Composition, scaling, integrations
-- **[INSTALL.md](INSTALL.md)** – Troubleshooting
-
-## Use Cases
-
-### Code Review at Scale
-Define a code-review template once. Teams reuse it for every code review with language, snippet, and focus.
-
-### Test Generation Consistency
-Use a test-generator template to ensure tests follow a consistent structure.
-
-### Documentation Templates
-Keep documentation consistent across projects with parameterized templates.
-
-### Team Collaboration
-Share templates in steering files so everyone uses the same prompts.
-
-### Workflow Automation
-Compose templates in Kiro workflows for multi-step tasks.
-
-## How It Works
-
-1. **Store templates** in persistent storage (`~/.kiro/positional-prompts/templates.json`)
-2. **Render on demand** by substituting arguments into placeholders
-3. **Reuse anywhere** – in chat, workflows, or other tools
-4. **Share with teams** – include templates in steering files or documentation
-
-## Architecture
-
-- **server.js**: MCP server implementing the 4 tools
-- **power.json**: Metadata and MCP server config
-- **storage**: JSON file in `~/.kiro/positional-prompts/templates.json`
-
-No external dependencies, no database, no backend.
-
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
-
-## License
-
-MIT
-
-## Publishing
-
-To publish a new version:
-
-```bash
-npm version patch|minor|major
-npm publish
-```
-
-See [PUBLISH_CHECKLIST.md](PUBLISH_CHECKLIST.md) for full details.
 
 ---
 
-**Questions?** See the [guides](guides/) folder or open an issue.
+## 📂 Project Architecture
+
+```
+kiro-positional-prompts/
+├── plugin.json               # Agent Plugins 1.0.0 manifest for Kiro Power discovery
+├── mcp.json                  # MCP server configuration
+├── server.js                 # Standalone MCP server (Prompts + Tools + Persistence)
+├── test.js                   # Automated test suite validating MCP protocol
+├── package.json              # npm package metadata
+├── LICENSE                   # MIT License
+├── skills/
+│   └── positional-prompts/
+│       └── SKILL.md          # Agent skill instructions & best practices
+├── guides/                   # Detailed guides (team workflow, advanced usage)
+└── examples/
+    └── templates.json        # Reference templates export
+```
+
+---
+
+## 👤 Author
+
+<div align="right">
+  <table>
+    <tr>
+      <td align="center" width="56" valign="middle">
+        <a href="https://github.com/kc-agile">
+          <img src="assets/icon.svg" width="48" height="48" alt="KC" />
+        </a>
+      </td>
+      <td align="left" valign="middle">
+        <b>Krishna Chaitanya Rupavatharam</b> &nbsp;<code>KC</code><br/>
+        <a href="https://github.com/kc-agile">@kc-agile</a> • Built for Kiro & MCP Community
+      </td>
+    </tr>
+  </table>
+</div>
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
+

@@ -1,0 +1,50 @@
+[
+  [
+    "code-review",
+    {
+      "template": "Review this {0} code for quality, performance, and best practices:\n\n```{0}\n{1}\n```\n\nFocus areas: {2}",
+      "description": "Review code for quality, performance, and best practices",
+      "paramNames": ["language", "code", "focus"]
+    }
+  ],
+  [
+    "test-generator",
+    {
+      "template": "Write comprehensive unit tests for this {0} function:\n\n```{0}\n{1}\n```\n\nTest scope and coverage requirements: {2}",
+      "description": "Generate unit tests covering edge cases and happy path",
+      "paramNames": ["language", "code", "test_scope"]
+    }
+  ],
+  [
+    "refactor",
+    {
+      "template": "Refactor this {0} code to improve readability and maintainability:\n\n```{0}\n{1}\n```\n\nConstraints: {2}\nGoal: {3}",
+      "description": "Refactor code to improve readability and maintainability",
+      "paramNames": ["language", "code", "constraints", "goal"]
+    }
+  ],
+  [
+    "bug-analysis",
+    {
+      "template": "Analyze and fix this {0} bug:\n\nError / Symptom:\n{1}\n\nRelevant Code:\n```{0}\n{2}\n```\n\nExpected behavior:\n{3}",
+      "description": "Analyze an error and recommend the fix with code",
+      "paramNames": ["language", "error_message", "code", "expected_behavior"]
+    }
+  ],
+  [
+    "explain",
+    {
+      "template": "Explain this {0} code clearly for a {1} developer:\n\n```{0}\n{2}\n```\n\nHighlight key logic, patterns, and potential pitfalls.",
+      "description": "Explain code architecture and concepts for a target audience",
+      "paramNames": ["language", "audience", "code"]
+    }
+  ],
+  [
+    "api-design",
+    {
+      "template": "Design a {0} API endpoint for: {1}\n\nRequirements:\n{2}\n\nConstraints:\n{3}",
+      "description": "Design an API endpoint with schema, status codes, and constraints",
+      "paramNames": ["api_type", "use_case", "requirements", "constraints"]
+    }
+  ]
+]

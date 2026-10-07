@@ -1,8 +1,11 @@
 {
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/mcp.schema.json",
   "mcpServers": {
-    "positional-prompts-mcp": {
+    "positional-prompts": {
+      "type": "stdio",
       "command": "node",
-      "args": ["server.js"]
+      "args": ["server.js"],
+      "cwd": "${PLUGIN_ROOT}"
     }
   }
 }
