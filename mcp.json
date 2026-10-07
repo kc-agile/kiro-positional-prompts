@@ -1,6 +1,6 @@
 {
   "mcpServers": {
-    "positional-prompts": {
+    "positional-prompts-mcp": {
       "command": "node",
       "args": ["server.js"]
     }
