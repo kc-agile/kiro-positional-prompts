@@ -6,10 +6,22 @@
   "bin": {
     "positional-prompts": "server.js"
   },
-  "keywords": ["kiro", "power", "prompts", "templates"],
+  "scripts": {
+    "test": "node test.js"
+  },
+  "keywords": ["kiro", "power", "prompts", "templates", "mcp"],
   "author": "",
   "license": "MIT",
   "engines": {
     "node": ">=18.0.0"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/kiro-positional-prompts.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/kiro-positional-prompts/issues"
+  },
+  "homepage": "https://github.com/your-username/kiro-positional-prompts#readme"
 }
+
