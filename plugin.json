@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.1.0",
+  "name": "Positional Prompts",
+  "version": "1.0.0",
+  "displayName": "Positional Prompts",
+  "description": "Template and reuse prompts with positional parameters. Create prompt templates with {0}, {1}, etc., then fill them with arguments.",
+  "author": "Krishna chaitanya Rupavatharam",
+  "license": "MIT",
+  "keywords": [
+    "prompts",
+    "templates",
+    "parametric",
+    "reuse"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kc-agile/kiro-positional-prompts.git"
+  }
+}
+

@@ -25,23 +25,33 @@ Result:    "Review this TypeScript code:\n\n...\n\nFocus on: type safety"
 
 ## Install
 
-Add to `.kiro/settings/mcp.json`:
+### From GitHub
 
-```json
-{
-  "mcpServers": {
-    "positional-prompts": {
-      "command": "npx",
-      "args": ["@kiro-powers/positional-prompts"],
-      "disabled": false
-    }
-  }
-}
+```bash
+# Clone into local plugins directory
+git clone https://github.com/kc-agile/kiro-positional-prompts.git ~/.kiro/plugins/positional-prompts
 ```
+
+Then restart Kiro. The power will auto-discover via `plugin.json`.
+
+### From the Kiro UI
+
+1. Open Kiro → Powers panel
+2. Click "Add plugin from GitHub"
+3. Enter: `kc-agile/kiro-positional-prompts`
+4. Click install
 
 Then restart Kiro.
 
-**See [INSTALL.md](INSTALL.md) for detailed setup and troubleshooting.**
+### For Local Development
+
+```bash
+git clone https://github.com/kc-agile/kiro-positional-prompts.git
+cd kiro-positional-prompts
+npm test  # Verify MCP server works
+```
+
+Then add to Kiro plugins from the local path.
 
 ## Quick Start
 
