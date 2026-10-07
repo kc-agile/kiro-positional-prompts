@@ -1,5 +1,5 @@
 ---
-name: Positional Prompts
+name: positional-prompts
 description: Template and reuse prompts with positional parameters
 keywords:
   - prompts
