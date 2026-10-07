@@ -102,15 +102,17 @@ To add this server directly to your Kiro workspace settings (`.kiro/settings/mcp
 
 ### 1. In Kiro Chat (Interactive Slash Command)
 
-Type `/` in chat to see your prompts with argument auto-complete:
+You can invoke templates via the power command namespace or directly:
 
 ```text
-/code-review language="TypeScript" code="const add = (a: number, b: number) => a + b;" focus="type safety"
+/positional-prompts multiply-by-nine 5      → 5 × 9 = 45
+/positional-prompts multiply-by-nine 100    → 100 × 9 = 900
+/positional-prompts multiply-by-nine 7.5    → 7.5 × 9 = 67.5
 ```
 
-Or pass positional values:
+Or pass named parameters:
 ```text
-/code-review TypeScript "const add = (a: number, b: number) => a + b;" "type safety"
+/positional-prompts code-review language="TypeScript" code="const add = (a, b) => a + b;" focus="safety"
 ```
 
 ### 2. Creating New Templates On the Fly

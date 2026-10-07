@@ -17,9 +17,10 @@ This Power gives you and your AI agent the ability to define, manage, and invoke
 ## 💡 How to Use
 
 ### 1. In Kiro Chat (Slash Commands)
-Once you create a template, type `/` in chat to invoke it directly:
+Once you create a template, invoke it via the power namespace:
 ```text
-/code-review typescript "const add = (a, b) => a + b;" "type safety"
+/positional-prompts multiply-by-nine 5
+/positional-prompts code-review typescript "const add = (a, b) => a + b;" "type safety"
 ```
 
 ### 2. Available Tools for the Agent
