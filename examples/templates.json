@@ -1,0 +1,44 @@
+[
+  [
+    "code-review",
+    {
+      "template": "Review this {0} code:\n\n```{0}\n{1}\n```\n\nFocus on: {2}",
+      "description": "Code review template for analyzing code quality"
+    }
+  ],
+  [
+    "test-generator",
+    {
+      "template": "Write unit tests for this {0} function:\n\n```{0}\n{1}\n```\n\nTest cases should cover: {2}",
+      "description": "Generate test cases for a function"
+    }
+  ],
+  [
+    "documentation",
+    {
+      "template": "Write {0} documentation for this {1} component:\n\n{2}\n\nTarget audience: {3}",
+      "description": "Create documentation for code components"
+    }
+  ],
+  [
+    "refactor",
+    {
+      "template": "Refactor this {0} code:\n\n```{0}\n{1}\n```\n\nConstraints: {2}\n\nGoal: {3}",
+      "description": "Refactor code with specific constraints"
+    }
+  ],
+  [
+    "bug-analysis",
+    {
+      "template": "Analyze this {0} bug:\n\nError: {1}\n\nContext: {2}\n\nExpected behavior: {3}",
+      "description": "Debug and fix issues"
+    }
+  ],
+  [
+    "api-design",
+    {
+      "template": "Design a {0} API for: {1}\n\nRequirements: {2}\n\nConstraints: {3}",
+      "description": "Design APIs with requirements"
+    }
+  ]
+]

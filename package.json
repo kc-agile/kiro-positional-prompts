@@ -1,0 +1,15 @@
+{
+  "name": "@kiro-powers/positional-prompts",
+  "version": "1.0.0",
+  "description": "Template and reuse prompts with positional parameters",
+  "main": "server.js",
+  "bin": {
+    "positional-prompts": "server.js"
+  },
+  "keywords": ["kiro", "power", "prompts", "templates"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

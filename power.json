@@ -1,0 +1,17 @@
+{
+  "name": "Positional Prompts",
+  "version": "1.0.0",
+  "description": "Template and reuse prompts with positional parameters. Create prompt templates with {0}, {1}, etc., then fill them with arguments.",
+  "keywords": ["prompts", "templates", "parametric", "reuse"],
+  "author": "Your Team",
+  "license": "MIT",
+  "skills": [],
+  "steeringFiles": ["guides/getting-started.md"],
+  "mcpServers": {
+    "positional-prompts": {
+      "type": "stdio",
+      "command": "node",
+      "args": ["server.js"]
+    }
+  }
+}
