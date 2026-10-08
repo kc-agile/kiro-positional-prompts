@@ -26,6 +26,14 @@ Bring GitHub Copilot-style positional parameter prompt templates (`{0}`, `{1}`, 
 
 ---
 
+## 🚀 Execution Behavior (CRITICAL RULE)
+
+When a prompt template is invoked (either via slash command in chat or via the `render_prompt` tool):
+1. **Execute, Never Just Echo**: The agent MUST immediately process and fulfill the instructions in the prompt. Deliver the actual completed work (e.g. the summary, the code review, the unit tests, or the analysis).
+2. **Never Stop at the Prompt**: The user invokes a template to get the actual answer, NOT to see an empty or filled prompt template. Always provide the complete solution.
+
+---
+
 ## 💡 Quick Example
 
 Invoke templates in chat:

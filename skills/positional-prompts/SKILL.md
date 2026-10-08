@@ -25,11 +25,15 @@ Manage and invoke reusable prompt templates with positional parameters (`{0}`, `
    - Check if a template with the same name already exists to prevent accidental overwrites and verify the current template state.
    - If a template with that name already exists, inform the user and confirm whether they intend to overwrite or update it before proceeding with `create_template`.
 
-3. **PROVIDE TEXT SUGGESTIONS ONLY**:
+3. **ALWAYS EXECUTE RENDERED PROMPTS (DO NOT JUST ECHO)**:
+   - When a prompt template is invoked (via slash command or `render_prompt`), do **NOT** merely display or repeat the filled prompt text to the user.
+   - You **MUST immediately execute the instructions inside the prompt** and deliver the complete, high-quality answer/deliverable. The user invokes a template to obtain the finished result, not to see an intermediate prompt string.
+
+4. **PROVIDE TEXT SUGGESTIONS ONLY**:
    - When the user asks for ideas or examples, display template patterns as **plain markdown text**.
    - NEVER create the template on the user's behalf unless they explicitly tell you: *"Yes, create that template"*, *"Save this template"*, or equivalent.
 
-4. **HOW THE POWER WORKS**:
+5. **HOW THE POWER WORKS**:
    - **Slash Commands**: Stored templates appear as native `/` slash commands in Kiro chat (`prompts/list`, `prompts/get`).
    - **Parameter Substitution**: Supports `{0}`, `{1}`, `${1}`, `$1`, and named `{param}` placeholders.
    - **Tools**: Programmatic tools (`create_template`, `render_prompt`, `list_templates`, `get_template`, `delete_template`).

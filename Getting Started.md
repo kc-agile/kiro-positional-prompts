@@ -13,6 +13,7 @@ The **Positional Prompts Power** enables reusable prompt templates with position
 - **PROVIDE SUGGESTIONS ONLY**: When the user asks for prompt ideas, offer template suggestions as plain text examples and let the user decide if they want to create them.
 - **EXPLICIT CONFIRMATION REQUIRED**: Only call `create_template` when the user explicitly commands you to save or create a template.
 - **ALWAYS CALL `list_templates` BEFORE CREATING**: When explicitly asked to create a template, you **MUST** call `list_templates` first to inspect existing templates, check if the template name already exists, and prevent unintended overwrites.
+- **ALWAYS EXECUTE RENDERED PROMPTS**: When a template is invoked (in chat or via `render_prompt`), do **NOT** merely display or repeat the filled prompt text. You **MUST immediately execute the instructions inside the prompt** and provide the complete final answer/deliverable directly to the user.
 
 ---
 
