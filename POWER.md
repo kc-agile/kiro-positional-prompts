@@ -1,3 +1,14 @@
+---
+name: "kiro-positional-prompts"
+displayName: "Positional Prompts"
+description: "Template and reuse prompts with positional parameters ({0}, {1}, $1, $2) and interactive slash commands in Kiro."
+keywords: ["prompts", "templates", "positional-parameters", "slash-commands", "mcp"]
+author: "Krishna Chaitanya Rupavatharam (KC)"
+version: "1.0.0"
+iconUrl: "https://raw.githubusercontent.com/kc-agile/kiro-positional-prompts/main/icon.svg"
+icon: "icon.svg"
+---
+
 # Positional Prompts Power
 
 **Created by Krishna Chaitanya Rupavatharam (KC)**
