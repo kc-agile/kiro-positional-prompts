@@ -1,16 +1,12 @@
-<p align="center">
-  <img src="assets/icon.svg" width="84" height="84" alt="KC - Positional Prompts Power" /><br/>
-  <b>Positional Prompts Power for Kiro ⚡</b><br/>
-  <sub>Created by <b>Krishna Chaitanya Rupavatharam</b> (<b>KC</b>)</sub>
-</p>
+# ⚡ Positional Prompts Power for Kiro
 
-<p align="center">
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License: MIT" /></a>
-  <a href="https://nodejs.org/"><img src="https://img.shields.io/badge/Node.js-%3E%3D18.0.0-green.svg" alt="Node.js" /></a>
-  <a href="https://modelcontextprotocol.io/"><img src="https://img.shields.io/badge/MCP-Protocol-purple.svg" alt="MCP Protocol" /></a>
-  <a href="https://agent-plugins.org/"><img src="https://img.shields.io/badge/Agent%20Plugins-1.0.0-orange.svg" alt="Agent Plugins" /></a>
-  <a href="test.js"><img src="https://img.shields.io/badge/tests-passing-brightgreen.svg" alt="Tests" /></a>
-</p>
+**Created by Krishna Chaitanya Rupavatharam (KC)**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Node.js >=18.0.0](https://img.shields.io/badge/Node.js-%3E%3D18.0.0-green.svg)](https://nodejs.org/)
+[![MCP Protocol](https://img.shields.io/badge/MCP-Protocol-purple.svg)](https://modelcontextprotocol.io/)
+[![Agent Plugins 1.0.0](https://img.shields.io/badge/Agent%20Plugins-1.0.0-orange.svg)](https://agent-plugins.org/)
+[![Tests Passing](https://img.shields.io/badge/tests-passing-brightgreen.svg)](test.js)
 
 > Bring GitHub Copilot-style positional parameter prompts (`{0}`, `{1}`, `$1`, `$2`) and interactive slash commands to **Kiro** and any **MCP-compatible** agent.
 
@@ -203,21 +199,9 @@ kiro-positional-prompts/
 
 ## 👤 Author
 
-<div align="right">
-  <table>
-    <tr>
-      <td align="center" width="56" valign="middle">
-        <a href="https://github.com/kc-agile">
-          <img src="assets/icon.svg" width="48" height="48" alt="KC" />
-        </a>
-      </td>
-      <td align="left" valign="middle">
-        <b>Krishna Chaitanya Rupavatharam</b> &nbsp;<code>KC</code><br/>
-        <a href="https://github.com/kc-agile">@kc-agile</a> • Built for Kiro & MCP Community
-      </td>
-    </tr>
-  </table>
-</div>
+**Krishna Chaitanya Rupavatharam (KC)**
+- GitHub: [@kc-agile](https://github.com/kc-agile)
+- Built for the Kiro & MCP Community
 
 ## 📄 License
 

@@ -20,11 +20,16 @@ Manage and invoke reusable prompt templates with positional parameters (`{0}`, `
    - Do **NOT** call the `create_template` tool during onboarding, introductions, or unprompted chats.
    - The template store starts completely empty. The user has full control and decides what templates to create.
 
-2. **PROVIDE TEXT SUGGESTIONS ONLY**:
+2. **ALWAYS CALL `list_templates` BEFORE CREATING A TEMPLATE**:
+   - When the user explicitly requests to create a template, you **MUST** call `list_templates` first to inspect existing templates.
+   - Check if a template with the same name already exists to prevent accidental overwrites and verify the current template state.
+   - If a template with that name already exists, inform the user and confirm whether they intend to overwrite or update it before proceeding with `create_template`.
+
+3. **PROVIDE TEXT SUGGESTIONS ONLY**:
    - When the user asks for ideas or examples, display template patterns as **plain markdown text**.
    - NEVER create the template on the user's behalf unless they explicitly tell you: *"Yes, create that template"*, *"Save this template"*, or equivalent.
 
-3. **HOW THE POWER WORKS**:
+4. **HOW THE POWER WORKS**:
    - **Slash Commands**: Stored templates appear as native `/` slash commands in Kiro chat (`prompts/list`, `prompts/get`).
    - **Parameter Substitution**: Supports `{0}`, `{1}`, `${1}`, `$1`, and named `{param}` placeholders.
    - **Tools**: Programmatic tools (`create_template`, `render_prompt`, `list_templates`, `get_template`, `delete_template`).

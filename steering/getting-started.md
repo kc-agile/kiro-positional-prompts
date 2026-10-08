@@ -12,6 +12,7 @@ The **Positional Prompts Power** enables reusable prompt templates with position
 - **USER-DRIVEN ONLY**: The user decides what templates they need. The template store starts completely empty.
 - **PROVIDE SUGGESTIONS ONLY**: When the user asks for prompt ideas, offer template suggestions as plain text examples and let the user decide if they want to create them.
 - **EXPLICIT CONFIRMATION REQUIRED**: Only call `create_template` when the user explicitly commands you to save or create a template.
+- **ALWAYS CALL `list_templates` BEFORE CREATING**: When explicitly asked to create a template, you **MUST** call `list_templates` first to inspect existing templates, check if the template name already exists, and prevent unintended overwrites.
 
 ---
 

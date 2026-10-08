@@ -218,7 +218,7 @@ function handleRequest(req) {
         tools: [
           {
             name: 'create_template',
-            description: 'Create or update a prompt template with positional ({0}, {1}, $1, $2) and named placeholders',
+            description: 'Create or update a prompt template with positional ({0}, {1}, $1, $2) and named placeholders. IMPORTANT: Always call list_templates first before creating a template to inspect existing templates and avoid unintended overwrites.',
             inputSchema: {
               type: 'object',
               properties: {
@@ -254,7 +254,7 @@ function handleRequest(req) {
           },
           {
             name: 'list_templates',
-            description: 'List all stored prompt templates with their descriptions and parameters',
+            description: 'List all stored prompt templates with their descriptions, parameters, and content. Always call this tool first before calling create_template.',
             inputSchema: { type: 'object', properties: {} }
           },
           {
@@ -301,10 +301,20 @@ function handleRequest(req) {
           createdAt: new Date().toISOString()
         };
 
+        const isUpdate = prompts.has(templateName);
         prompts.set(templateName, templateData);
         saveTemplates(prompts);
 
+        const paramsStr = templateData.paramNames.length > 0 ? templateData.paramNames.join(', ') : '(positional/none)';
+        const textMsg = `Template "${templateName}" ${isUpdate ? 'updated' : 'created'} successfully.\nDescription: ${templateData.description || '(none)'}\nParameters: ${paramsStr}\n\nTemplate:\n${templateData.template}`;
+
         sendResponse(id, {
+          content: [
+            {
+              type: 'text',
+              text: textMsg
+            }
+          ],
           success: true,
           message: `Template "${templateName}" created successfully`,
           template: templateData
@@ -326,6 +336,12 @@ function handleRequest(req) {
         const argsCount = Array.isArray(args) ? args.length : Object.keys(args || {}).length;
 
         sendResponse(id, {
+          content: [
+            {
+              type: 'text',
+              text: rendered
+            }
+          ],
           success: true,
           template: templateName,
           rendered,
@@ -334,6 +350,12 @@ function handleRequest(req) {
       }
 
       else if (name === 'list_templates') {
+        const loaded = loadTemplates();
+        prompts.clear();
+        for (const [k, v] of loaded.entries()) {
+          prompts.set(k, v);
+        }
+
         const list = Array.from(prompts.entries()).map(([tName, data]) => ({
           name: tName,
           description: data.description,
@@ -341,7 +363,26 @@ function handleRequest(req) {
           template: data.template,
           createdAt: data.createdAt
         }));
-        sendResponse(id, { templates: list });
+
+        let textOutput;
+        if (list.length === 0) {
+          textOutput = 'No templates currently stored. The template store is empty.';
+        } else {
+          textOutput = `Found ${list.length} stored template(s):\n\n` + list.map((t, idx) => {
+            const paramsStr = t.paramNames && t.paramNames.length > 0 ? t.paramNames.join(', ') : 'none specified';
+            return `${idx + 1}. **${t.name}**\n   - Description: ${t.description || 'No description'}\n   - Parameters: ${paramsStr}\n   - Template:\n${t.template}`;
+          }).join('\n\n');
+        }
+
+        sendResponse(id, {
+          content: [
+            {
+              type: 'text',
+              text: textOutput
+            }
+          ],
+          templates: list
+        });
       }
 
       else if (name === 'get_template') {
@@ -354,7 +395,17 @@ function handleRequest(req) {
           });
           return;
         }
+
+        const paramsStr = prompt.paramNames && prompt.paramNames.length > 0 ? prompt.paramNames.join(', ') : 'none specified';
+        const textOutput = `Template: ${templateName}\nDescription: ${prompt.description || 'No description'}\nParameters: ${paramsStr}\nCreated: ${prompt.createdAt || 'N/A'}\n\nContent:\n${prompt.template}`;
+
         sendResponse(id, {
+          content: [
+            {
+              type: 'text',
+              text: textOutput
+            }
+          ],
           name: templateName,
           ...prompt
         });
@@ -372,6 +423,12 @@ function handleRequest(req) {
         prompts.delete(templateName);
         saveTemplates(prompts);
         sendResponse(id, {
+          content: [
+            {
+              type: 'text',
+              text: `Template "${templateName}" deleted successfully.`
+            }
+          ],
           success: true,
           message: `Template "${templateName}" deleted`
         });

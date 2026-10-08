@@ -10,7 +10,8 @@ This Power gives you and your AI agent the ability to define, manage, and invoke
 
 1. **User-Driven Creation (Zero Auto-Creation)**: The AI agent will **never** proactively create or offer to create templates (no *"Let me create a simple template for you"*). The user has complete control and decides what templates to create.
 2. **Helpful Suggestions Only**: When asked for ideas, the agent will suggest template structures in plain text and wait for your explicit confirmation before saving anything.
-3. **Dual Protocol**: Works as native slash commands in Kiro Chat (`prompts/get`) and as programmatic tools for agents (`tools/call`).
+3. **Inspect Before Create**: When asked to create a template, the agent must call `list_templates` first to verify existing templates and avoid overwriting any existing template unexpectedly.
+4. **Dual Protocol**: Works as native slash commands in Kiro Chat (`prompts/get`) and as programmatic tools for agents (`tools/call`).
 
 ---
 

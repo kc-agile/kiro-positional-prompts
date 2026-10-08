@@ -126,16 +126,29 @@ async function runTests() {
     throw new Error(`Unexpected render output: ${renderedTool.rendered}`);
   }
 
-  // Test 7: tools/call get_template
-  console.log('\n7️⃣  Testing tools/call get_template...');
+  // Test 7: tools/call list_templates
+  console.log('\n7️⃣  Testing tools/call list_templates...');
+  const listed = await call('tools/call', {
+    name: 'list_templates'
+  });
+  console.log('   ✓ Found templates via tool call:', listed.templates.length);
+  if (!listed.content || !Array.isArray(listed.content) || listed.content.length === 0 || typeof listed.content[0].text !== 'string') {
+    throw new Error('list_templates missing valid MCP content text array');
+  }
+
+  // Test 8: tools/call get_template
+  console.log('\n8️⃣  Testing tools/call get_template...');
   const fetched = await call('tools/call', {
     name: 'get_template',
     arguments: { name: 'test-calc' }
   });
   console.log('   ✓ Fetched template details for:', fetched.name);
+  if (!fetched.content || !Array.isArray(fetched.content) || fetched.content.length === 0 || typeof fetched.content[0].text !== 'string') {
+    throw new Error('get_template missing valid MCP content text array');
+  }
 
-  // Test 8: tools/call delete_template
-  console.log('\n8️⃣  Testing tools/call delete_template...');
+  // Test 9: tools/call delete_template
+  console.log('\n9️⃣  Testing tools/call delete_template...');
   const deleted = await call('tools/call', {
     name: 'delete_template',
     arguments: { name: 'test-calc' }
