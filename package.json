@@ -1,6 +1,6 @@
 {
   "name": "kiro-positional-prompts",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Kiro Power and MCP Server for prompt templates with positional parameters ({0}, {1}, $1, $2) and interactive slash commands",
   "main": "server.js",
   "bin": {
