@@ -6,8 +6,6 @@
   "author": {
     "name": "Krishna chaitanya Rupavatharam"
   },
-  "icon": "icon.svg",
-  "iconUrl": "https://raw.githubusercontent.com/kc-agile/kiro-positional-prompts/main/icon.svg",
   "homepage": "https://github.com/kc-agile/kiro-positional-prompts#readme",
   "repository": "https://github.com/kc-agile/kiro-positional-prompts.git",
   "license": "MIT",
